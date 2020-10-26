@@ -111,7 +111,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.099999815, y: -0.19999999, z: 0}
+  m_ConnectedAnchor: {x: -0.099999994, y: -0.19999999, z: 0}
   m_UseSpring: 1
   m_Spring:
     spring: 10
@@ -260,7 +260,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 1, z: 0}
   m_Axis: {x: 1, y: 1, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.099999815, y: -0.19999999, z: 0}
+  m_ConnectedAnchor: {x: 0.099999994, y: -0.19999999, z: 0}
   m_UseSpring: 1
   m_Spring:
     spring: 10
@@ -310,7 +310,7 @@ GameObject:
   - component: {fileID: 7986825612560011943}
   - component: {fileID: 7986825612560011940}
   - component: {fileID: 748629576485587089}
-  - component: {fileID: 3399381978200115542}
+  - component: {fileID: 224891682287967410}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -402,11 +402,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 3399381978200115542}
+  - {fileID: 224891682287967410}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &3399381978200115542
+--- !u!114 &224891682287967410
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -415,12 +415,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 7986825612560011930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 2
+    InterpolateRotateTowardsSpeed: 720
+    InterpolateLerpSpeed: 15
+  m_ScaleModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
 --- !u!1 &7986825612681630500
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,7 +876,7 @@ GameObject:
   - component: {fileID: 7986825613606279380}
   - component: {fileID: 7986825613606279383}
   - component: {fileID: 2275464649750128734}
-  - component: {fileID: 8603226682064224789}
+  - component: {fileID: 1226026464409849412}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -959,11 +977,11 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 8603226682064224789}
+  - {fileID: 1226026464409849412}
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &8603226682064224789
+--- !u!114 &1226026464409849412
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -972,12 +990,30 @@ MonoBehaviour:
   m_GameObject: {fileID: 7986825613606279371}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Script: {fileID: 11500000, guid: 8efc6b1d64977384eb3405357896c656, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  m_PositionModel:
+    SynchronizeEnabled: 1
+    TeleportEnabled: 1
+    TeleportIfDistanceGreaterThan: 3
+    InterpolateOption: 2
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 1
+    ExtrapolateOption: 0
+    ExtrapolateSpeed: 1
+    ExtrapolateIncludingRoundTripTime: 1
+    ExtrapolateNumberOfStoredPositions: 1
+  m_RotationModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 2
+    InterpolateRotateTowardsSpeed: 720
+    InterpolateLerpSpeed: 15
+  m_ScaleModel:
+    SynchronizeEnabled: 1
+    InterpolateOption: 0
+    InterpolateMoveTowardsSpeed: 1
+    InterpolateLerpSpeed: 0
 --- !u!1 &7986825613707396752
 GameObject:
   m_ObjectHideFlags: 0
