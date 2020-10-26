@@ -859,7 +859,6 @@ GameObject:
   - component: {fileID: 7986825613606279383}
   - component: {fileID: 2275464649750128734}
   - component: {fileID: 8603226682064224789}
-  - component: {fileID: 6713346449284716709}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -979,26 +978,6 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
---- !u!114 &6713346449284716709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7986825613606279371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f138977e40e31f479e9a659ff065d57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PhotonView: {fileID: 2275464649750128734}
-  ObjectsToCull:
-  - {fileID: 7986825613444495695}
-  - {fileID: 7986825612681630500}
-  - {fileID: 7986825612393848855}
-  - {fileID: 7986825612557522438}
-  - {fileID: 7986825612763868358}
-  CullLayer: CameraCull
 --- !u!1 &7986825613707396752
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,6 +1160,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7986825613945221042}
+  - component: {fileID: 8814456006447111462}
+  - component: {fileID: 7422301436522057189}
   m_Layer: 0
   m_Name: PlayerModel
   m_TagString: Untagged
@@ -1206,3 +1187,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8814456006447111462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7986825613945221043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents:
+  - {fileID: 0}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &7422301436522057189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7986825613945221043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f138977e40e31f479e9a659ff065d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PhotonView: {fileID: 2275464649750128734}
+  ObjectsToCull:
+  - {fileID: 7986825613444495695}
+  - {fileID: 7986825612681630500}
+  - {fileID: 7986825612393848855}
+  - {fileID: 7986825612557522438}
+  - {fileID: 7986825612763868358}
+  CullLayer: CameraCull
+  BehavioursToDisable:
+  - {fileID: 7986825613606279380}
+  - {fileID: 7986825613606279383}
+  - {fileID: 7986825612560011943}
+  CharacterControllerToDisable: {fileID: 7986825613606279381}

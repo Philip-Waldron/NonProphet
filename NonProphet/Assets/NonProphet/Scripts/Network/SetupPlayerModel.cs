@@ -1,12 +1,15 @@
 ﻿using Photon.Pun;
 using UnityEngine;
 
-public class CullSelfPlayerModel : MonoBehaviour
+public class SetupPlayerModel : MonoBehaviour
 {
     public PhotonView PhotonView;
 
     public GameObject[] ObjectsToCull;
     public string CullLayer;
+
+    public Behaviour[] BehavioursToDisable;
+    public CharacterController CharacterControllerToDisable;
 
     void Start()
     {
@@ -16,6 +19,15 @@ public class CullSelfPlayerModel : MonoBehaviour
             {
                 item.layer = LayerMask.NameToLayer(CullLayer);
             }
+        }
+        else
+        {
+            foreach (var item in BehavioursToDisable)
+            {
+                item.enabled = false;
+            }
+
+            CharacterControllerToDisable.enabled = false;
         }
     }
 }

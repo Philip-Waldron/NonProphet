@@ -3252,7 +3252,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 637202742}
-  - component: {fileID: 637202741}
   - component: {fileID: 637202740}
   m_Layer: 0
   m_Name: PhotonPlayer
@@ -3273,31 +3272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80c13d3a2fe10e74e8cbe455bba24719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _photonView: {fileID: 637202741}
   PlayerPrefab: {fileID: 7986825613945221043, guid: 47490b47380ce544abce70c5a043cac5, type: 3}
-  playerObjectsToCullFromCamera: []
---- !u!114 &637202741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637202739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 0
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 1
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
+  PlayerModel: {fileID: 0}
 --- !u!4 &637202742
 Transform:
   m_ObjectHideFlags: 0
