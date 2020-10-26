@@ -5,11 +5,12 @@ public class SetupPlayerModel : MonoBehaviour
 {
     public PhotonView PhotonView;
 
-    public GameObject[] ObjectsToCull;
+    [Header("Cull these from the local player's camera")]
     public string CullLayer;
+    public GameObject[] ObjectsToCull;
 
-    public Behaviour[] BehavioursToDisable;
-    public CharacterController CharacterControllerToDisable;
+    [Header("Remove these if the model isn't owned by the local player")]
+    public Component[] ComponentsToRemove;
 
     void Start()
     {
@@ -22,12 +23,10 @@ public class SetupPlayerModel : MonoBehaviour
         }
         else
         {
-            foreach (var item in BehavioursToDisable)
+            foreach (Component item in ComponentsToRemove)
             {
-                item.enabled = false;
+                Destroy(item);
             }
-
-            CharacterControllerToDisable.enabled = false;
         }
     }
 }
