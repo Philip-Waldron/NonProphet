@@ -12,14 +12,17 @@ public class PhotonPlayer : MonoBehaviour
         if (GameManager.Instance.IsUsingVR())
         {
             PlayerModel = PhotonNetwork.Instantiate(VRPlayerPrfab.name,
-                LevelManager.Instance.SpawnPoints[PhotonNetwork.LocalPlayer.ActorNumber].position,
-                LevelManager.Instance.SpawnPoints[PhotonNetwork.LocalPlayer.ActorNumber].rotation);
+                new Vector3(5, 5, 5),
+                Quaternion.identity);
         }
         else
         {
             PlayerModel = PhotonNetwork.Instantiate(PlayerPrefab.name,
-                LevelManager.Instance.SpawnPoints[PhotonNetwork.LocalPlayer.ActorNumber].position,
-                LevelManager.Instance.SpawnPoints[PhotonNetwork.LocalPlayer.ActorNumber].rotation);
+                new Vector3(5, 5, 5),
+                Quaternion.identity);
         }
     }
 }
+
+//LevelManager.Instance.SpawnPoints[PhotonNetwork.LocalPlayer.ActorNumber].position,
+//LevelManager.Instance.SpawnPoints[PhotonNetwork.LocalPlayer.ActorNumber].rotation);
