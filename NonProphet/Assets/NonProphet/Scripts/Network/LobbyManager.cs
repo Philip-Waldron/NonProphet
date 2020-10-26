@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
+    [Header("Game Scene")]
+    public string SceneName;
+
     [Header("Canvases")]
     public Canvas MainMenu;
     public Canvas LobbyMenu;
@@ -14,6 +17,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Button JoinButton;
     public Button RefreshNameButton;
     public Button LeaveButton;
+    public Button StartGameButton;
 
     [Space(20)]
     public GameObject SelfPlayerListingPrefab;
@@ -69,6 +73,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         LeaveButton.interactable = true;
+        StartGameButton.interactable = true;
 
         MainMenu.enabled = false;
         LobbyMenu.enabled = true;
@@ -98,6 +103,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             LeaveButton.interactable = false;
         }
 
+        if (StartGameButton != null)
+        {
+            StartGameButton.interactable = false;
+        }
+
         if (MainMenu != null)
         {
             MainMenu.enabled = true;
@@ -125,5 +135,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         Destroy(_playerListings[player.UserId]);
         _playerListings.Remove(player.UserId);
+    }
+
+    public void StartGame()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.LoadLevel(SceneName);
+        }
     }
 }
