@@ -12,7 +12,7 @@ public class SetupPlayerModel : MonoBehaviour
     [Header("Remove these if the model isn't owned by the local player")]
     public Component[] ComponentsToRemove;
 
-    void Start()
+    void Awake()
     {
         if (PhotonView.IsMine)
         {

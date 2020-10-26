@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7864050380591564827}
   - component: {fileID: 425861723693454535}
   - component: {fileID: 226856015327868117}
+  - component: {fileID: 2494691131220670793}
   m_Layer: 0
   m_Name: '[XR Player]'
   m_TagString: Player
@@ -152,11 +153,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 3
+  - {fileID: 226856015327868117}
+  viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &226856015327868117
@@ -186,12 +187,37 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     InterpolateOption: 2
     InterpolateRotateTowardsSpeed: 180
-    InterpolateLerpSpeed: 3
+    InterpolateLerpSpeed: 15
   m_ScaleModel:
     SynchronizeEnabled: 1
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!114 &2494691131220670793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3537935100338196466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f138977e40e31f479e9a659ff065d57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PhotonView: {fileID: 425861723693454535}
+  CullLayer: CameraCull
+  ObjectsToCull: []
+  ComponentsToRemove:
+  - {fileID: 3537935100338196465}
+  - {fileID: 2118816247188866999}
+  - {fileID: 3089769746079094424}
+  - {fileID: 7864050380591564827}
+  - {fileID: 3537935101090532976}
+  - {fileID: 3537935101090532977}
+  - {fileID: 3537935101090532982}
+  - {fileID: 3284680985748678586}
+  - {fileID: 2766737440646758731}
 --- !u!1 &3537935100945000850
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,11 +291,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 2
+  - {fileID: 2815425922365303753}
+  viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &2815425922365303753
@@ -299,7 +325,7 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     InterpolateOption: 2
     InterpolateRotateTowardsSpeed: 180
-    InterpolateLerpSpeed: 3
+    InterpolateLerpSpeed: 15
   m_ScaleModel:
     SynchronizeEnabled: 1
     InterpolateOption: 0
@@ -455,11 +481,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 1
+  - {fileID: 5337336366978294107}
+  viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &5337336366978294107
@@ -489,7 +515,7 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     InterpolateOption: 2
     InterpolateRotateTowardsSpeed: 180
-    InterpolateLerpSpeed: 5
+    InterpolateLerpSpeed: 15
   m_ScaleModel:
     SynchronizeEnabled: 1
     InterpolateOption: 0
@@ -568,11 +594,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 0
+  Synchronization: 3
   OwnershipTransfer: 0
   ObservedComponents:
-  - {fileID: 0}
-  viewIdField: 4
+  - {fileID: 5885346552942457145}
+  viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &5885346552942457145
@@ -602,7 +628,7 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     InterpolateOption: 2
     InterpolateRotateTowardsSpeed: 180
-    InterpolateLerpSpeed: 3
+    InterpolateLerpSpeed: 15
   m_ScaleModel:
     SynchronizeEnabled: 1
     InterpolateOption: 0

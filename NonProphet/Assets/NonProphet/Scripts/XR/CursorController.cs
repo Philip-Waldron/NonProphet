@@ -8,17 +8,17 @@ namespace NonProphet.Scripts.XR
     {
         [Header("Reference")]
         [SerializeField] private GameObject cursorPrefab;
-        
+
         internal const float Range = 100f;
         private Cursor leftCursor, rightCursor;
 
-        private void Awake()
+        private void Start()
         {
             leftCursor = CreateCursor(XRInputController.Check.Left);
             rightCursor = CreateCursor(XRInputController.Check.Right);
         }
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="check"></param>
         /// <returns></returns>
