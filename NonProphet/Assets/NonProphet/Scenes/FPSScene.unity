@@ -3273,6 +3273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 7986825613945221043, guid: 47490b47380ce544abce70c5a043cac5, type: 3}
+  VRPlayerPrfab: {fileID: 3537935100338196466, guid: 468eed719a135104ebca5e4fadf61361, type: 3}
   PlayerModel: {fileID: 0}
 --- !u!4 &637202742
 Transform:
