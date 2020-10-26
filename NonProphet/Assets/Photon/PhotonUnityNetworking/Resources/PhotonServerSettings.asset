@@ -15,7 +15,7 @@ MonoBehaviour:
   AppSettings:
     AppIdRealtime: 4c84b500-040b-42c8-a86c-1d618a6770a6
     AppIdChat: 
-    AppIdVoice: 
+    AppIdVoice: bc66d5e3-2e41-4273-b89d-15c0bdb9ccac
     AppVersion: 
     UseNameServer: 1
     FixedRegion: 
@@ -38,6 +38,7 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - ChangeColour
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
