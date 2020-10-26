@@ -1265,8 +1265,9 @@ MonoBehaviour:
   - {fileID: 7986825612557522438}
   - {fileID: 7986825612763868358}
   CullLayer: CameraCull
-  BehavioursToDisable:
+  ComponentsToRemove:
+  - {fileID: 7986825613606279381}
   - {fileID: 7986825613606279380}
   - {fileID: 7986825613606279383}
   - {fileID: 7986825612560011943}
-  CharacterControllerToDisable: {fileID: 7986825613606279381}
+  - {fileID: 7986825612560011940}
