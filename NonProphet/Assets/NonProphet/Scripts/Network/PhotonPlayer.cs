@@ -9,7 +9,7 @@ public class PhotonPlayer : MonoBehaviour
     void Start()
     {
         PlayerModel = PhotonNetwork.Instantiate(PlayerPrefab.name,
-            GameSetup.Instance.SpawnPoints[PhotonNetwork.LocalPlayer.ActorNumber].position,
-            GameSetup.Instance.SpawnPoints[PhotonNetwork.LocalPlayer.ActorNumber].rotation);
+            LevelManager.Instance.SpawnPoints[PhotonNetwork.LocalPlayer.ActorNumber].position,
+            LevelManager.Instance.SpawnPoints[PhotonNetwork.LocalPlayer.ActorNumber].rotation);
     }
 }

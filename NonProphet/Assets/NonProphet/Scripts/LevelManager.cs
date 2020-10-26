@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class GameSetup : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
-    public static GameSetup Instance;
+    public static LevelManager Instance;
 
     public Transform[] SpawnPoints;
 
