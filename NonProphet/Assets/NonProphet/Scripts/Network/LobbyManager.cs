@@ -25,6 +25,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Transform PlayerListLayout;
 
     private GameObject playerPlaceholder;
+    private Toggle godToggle;
 
     private Dictionary<string, GameObject> _playerListings = new Dictionary<string, GameObject>();
 
@@ -86,7 +87,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
 
         InstantiatePlayerListing(SelfPlayerListingPrefab, PhotonNetwork.LocalPlayer);
-        
+
         if (PhotonNetwork.IsMasterClient)
         {
             playerPlaceholder = PhotonNetwork.Instantiate("PlayerPlaceholder",

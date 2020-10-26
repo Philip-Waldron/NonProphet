@@ -898,6 +898,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 425861723693454535, guid: 468eed719a135104ebca5e4fadf61361, type: 3}
+      propertyPath: viewIdField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1604544113847905093, guid: 468eed719a135104ebca5e4fadf61361, type: 3}
+      propertyPath: viewIdField
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2118816247188866999, guid: 468eed719a135104ebca5e4fadf61361, type: 3}
       propertyPath: playerScale
       value: 5
@@ -969,6 +977,14 @@ PrefabInstance:
     - target: {fileID: 3537935100338196466, guid: 468eed719a135104ebca5e4fadf61361, type: 3}
       propertyPath: m_Name
       value: '[XR Rig]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5281611337895371530, guid: 468eed719a135104ebca5e4fadf61361, type: 3}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5880360726834495001, guid: 468eed719a135104ebca5e4fadf61361, type: 3}
+      propertyPath: viewIdField
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7864050380591564827, guid: 468eed719a135104ebca5e4fadf61361, type: 3}
       propertyPath: position
