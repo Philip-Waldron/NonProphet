@@ -13,7 +13,6 @@ namespace NonProphet.Scripts.XR
         private XRInputController.Check activeHand, inactiveHand;
         private bool locomotion;
         private Vector3 startHandPosition, startHandRotation, startPlayerPosition, startPlayerRotation;
-        private float ScaleFactor => transform.localScale.x;
 
         private void Awake()
         {
@@ -86,7 +85,7 @@ namespace NonProphet.Scripts.XR
         /// <returns></returns>
         private Vector3 Displacement()
         {
-            return (XRInputController.NormalisedPosition(activeHand, local: true) - startHandPosition) * ScaleFactor;
+            return (XRInputController.NormalisedPosition(activeHand, local: true) - startHandPosition) * XRInputController.ScaleFactor();
         }
         /// <summary>
         /// 

@@ -72,6 +72,8 @@ MonoBehaviour:
   rightTransform: {fileID: 3537935100945000849}
   leftXRController: {fileID: 3284680985748678586}
   rightXRController: {fileID: 2766737440646758731}
+  dynamicScaling: 1
+  playerScale: 1
   grabEvents:
     left:
       check: 0
@@ -82,6 +84,24 @@ MonoBehaviour:
       current: 0
       previous: 0
   selectEvents:
+    left:
+      check: 0
+      current: 0
+      previous: 0
+    right:
+      check: 0
+      current: 0
+      previous: 0
+  primaryEvents:
+    left:
+      check: 0
+      current: 0
+      previous: 0
+    right:
+      check: 0
+      current: 0
+      previous: 0
+  menuEvents:
     left:
       check: 0
       current: 0
@@ -103,6 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorPrefab: {fileID: 6662650067483676525, guid: 0868a9de6353d344d97f0cbb84e3d0f8, type: 3}
+  range: 100
+  dynamicScaling: 1
 --- !u!114 &7864050380591564827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,8 +137,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c2eb46b37100f42a82ecced4e1a6a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  position: 1
-  rotation: 1
 --- !u!1 &3537935100945000850
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +189,7 @@ MonoBehaviour:
   m_UIPressUsage: 2
   m_AxisToPressThreshold: 0.1
   m_ModelPrefab: {fileID: 5498660753709239594, guid: 827d68178c37d93488370edad58ac443, type: 3}
-  m_ModelTransform: {fileID: 0}
+  m_ModelTransform: {fileID: 3537935100945000849}
   m_AnimateModel: 0
   m_ModelSelectTransition: 
   m_ModelDeSelectTransition: 
@@ -358,7 +378,7 @@ MonoBehaviour:
   m_UIPressUsage: 2
   m_AxisToPressThreshold: 0.1
   m_ModelPrefab: {fileID: 5498660753709239594, guid: 827d68178c37d93488370edad58ac443, type: 3}
-  m_ModelTransform: {fileID: 0}
+  m_ModelTransform: {fileID: 3537935101972415518}
   m_AnimateModel: 0
   m_ModelSelectTransition: 
   m_ModelDeSelectTransition: 

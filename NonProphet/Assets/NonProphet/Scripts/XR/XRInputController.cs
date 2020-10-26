@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NonProphet.Scripts.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR;
@@ -9,15 +10,21 @@ namespace NonProphet.Scripts.XR
 {
     public class XRInputController : MonoBehaviour
     {
+        [Header("References")]
         [SerializeField] private Check dominantHand = Check.Right;
         [SerializeField] private Transform headTransform, leftTransform, rightTransform;
         [SerializeField] private XRController leftXRController, rightXRController;
+        [Header("Functionality")] 
+        [SerializeField] private bool dynamicScaling = true;
+        [Header("Modifiers")] 
+        [SerializeField, Range(.1f, 50f)] private float playerScale = 1f;
 
+        private float DefaultScale => playerScale;
+        private float currentScale, previousScale;
+        
         private InputDevice LeftInputDevice => leftXRController.inputDevice;
         private InputDevice RightInputDevice => rightXRController.inputDevice;
-
-        [HideInInspector] public InputEvents grabEvents, selectEvents;
-        
+        [HideInInspector] public InputEvents grabEvents, selectEvents, primaryEvents, menuEvents;
         [Serializable] public class InputEvents
         {
             [Serializable] public class InputEvent
@@ -65,8 +72,7 @@ namespace NonProphet.Scripts.XR
                             return false;
                     }
                 }
-            } 
-            
+            }
             public InputEvent left, right;
             /// <summary>
             /// 
@@ -99,25 +105,84 @@ namespace NonProphet.Scripts.XR
                 }
             }
         }
-
+        
+        /// <summary>
+        /// </summary>
+        private void OnValidate()
+        {
+            transform.ScaleFactor(playerScale);
+        }
+        /// <summary>
+        /// Called once per frame
+        /// </summary>
         private void Update()
         {
             grabEvents.SetState(Grab(Check.Left), Grab(Check.Right));
             selectEvents.SetState(Select(Check.Left), Select(Check.Right));
+            primaryEvents.SetState(Primary(Check.Left), Primary(Check.Right));
+            menuEvents.SetState(Menu(Check.Left), Menu(Check.Right));
         }
-
-        #region Private Accessors
-
+        /// <summary>
+        /// 
+        /// </summary>
         public enum Check
         {
             Left, 
             Right, 
             Head
         }
+        /// <summary>
+        /// 
+        /// </summary>
         public enum Event
         {
             Grab, 
-            Select
+            Select,
+            Primary,
+            Menu
+        }
+        /// <summary>
+        /// An abstracted accessor to get each of the defined input events
+        /// </summary>
+        /// <param name="eventType"></param>
+        /// <returns></returns>
+        public InputEvents InputEvent(Event eventType)
+        {
+            switch (eventType)
+            {
+                case Event.Grab:
+                    return grabEvents;
+                case Event.Select:
+                    return selectEvents;
+                case Event.Primary:
+                    return primaryEvents;
+                case Event.Menu:
+                    return menuEvents;
+                default:
+                    return null;
+            }
+        }
+        /// <summary>
+        /// Will be true on any frame where the scale of the XR Player changes
+        /// </summary>
+        /// <returns></returns>
+        public bool ScaleChange()
+        {
+            if (!dynamicScaling) return false;
+            
+            currentScale = playerScale;
+            bool change = Math.Abs(currentScale - previousScale) < float.Epsilon;
+            previousScale = currentScale;
+            
+            return change;
+        }
+        /// <summary>
+        /// Returns the factor by which the XR Player has been scaled
+        /// </summary>
+        /// <returns></returns>
+        public float ScaleFactor()
+        {
+            return dynamicScaling ? playerScale : DefaultScale;
         }
         /// <summary>
         /// 
@@ -134,23 +199,6 @@ namespace NonProphet.Scripts.XR
         public Check NonDominantHand()
         {
             return dominantHand == Check.Right ? Check.Left : Check.Right;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="eventType"></param>
-        /// <returns></returns>
-        public InputEvents InputEvent(Event eventType)
-        {
-            switch (eventType)
-            {
-                case Event.Grab:
-                    return grabEvents;
-                case Event.Select:
-                    return selectEvents;
-                default:
-                    return null;
-            }
         }
         /// <summary>
         /// 
@@ -296,8 +344,6 @@ namespace NonProphet.Scripts.XR
         {
             return headTransform.forward;
         }
-
-        #endregion
         /// <summary>
         /// 
         /// </summary>

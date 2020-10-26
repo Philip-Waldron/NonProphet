@@ -1,16 +1,16 @@
 ﻿using System;
+using NonProphet.Scripts.Utilities;
 using UnityEngine;
 
 namespace NonProphet.Scripts.XR
 {
     public class CursorController : MonoBehaviour
     {
+        [Header("Reference")]
         [SerializeField] private GameObject cursorPrefab;
-        [SerializeField, Range(1, 250)] private float distance = 100f;
-
-        private Cursor leftCursor, rightCursor;
         
-        private float ScaleFactor => transform.localScale.x;
+        internal const float Range = 100f;
+        private Cursor leftCursor, rightCursor;
 
         private void Awake()
         {
@@ -25,10 +25,9 @@ namespace NonProphet.Scripts.XR
         private Cursor CreateCursor(XRInputController.Check check)
         {
             Cursor cursor = Instantiate(cursorPrefab).GetComponent<Cursor>();
-            cursor.transform.localScale = new Vector3(ScaleFactor, ScaleFactor, ScaleFactor);
             cursor.name = $"[Cursor / {check.ToString()}]";
             cursor.transform.SetParent(transform);
-            cursor.CreateCursor(check, distance, ScaleFactor);
+            cursor.CreateCursor(check);
             return cursor;
         }
     }

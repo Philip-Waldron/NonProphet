@@ -1,5 +1,6 @@
 ﻿using System;
 using DG.Tweening;
+using NonProphet.Scripts.Utilities;
 using UnityEngine;
 using Transition = NonProphet.Scripts.XR.XRInputController.InputEvents.InputEvent.Transition;
 
@@ -12,35 +13,34 @@ namespace NonProphet.Scripts.XR
         [SerializeField] private Sprite defaultState, grabState, selectState;
         [SerializeField, Range(0f, 1f)] private float defaultOffset, grabOffset, selectOffset, duration;
 
-        private float offset, range;
+        private float offset;
         private CursorState cursorState;
         private XRInputController.Check check;
-        
         private Vector3[] positions;
-
+        private CursorController CursorController => GetComponentInParent<CursorController>();
         private SpriteRenderer CursorSpriteRenderer => GetComponentInChildren<SpriteRenderer>();
         private LineRenderer CursorLineRenderer => GetComponentInChildren<LineRenderer>();
-        
+        private float initialWidth;
         private static XRInputController XRInputController => Reference.XRInputController();
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="handedness"></param>
-        /// <param name="distance"></param>
-        /// <param name="scale"></param>
-        public void CreateCursor(XRInputController.Check handedness, float distance, float scale)
+        public void CreateCursor(XRInputController.Check handedness)
         {
             check = handedness;
-            range = distance;
             CursorLineRenderer.useWorldSpace = false;
-            CursorLineRenderer.startWidth *= scale;
-            CursorLineRenderer.endWidth *= scale;
+            initialWidth = CursorLineRenderer.endWidth;
+            
+            transform.ScaleFactor(1f);
+            ScaleLineRendererWidth();
         }
         private void Update()
         {
             CursorPosition();
             LineRendererState();
+            ScaleLineRendererWidth(activate: XRInputController.ScaleChange());
             
             switch (cursorState)
             {
@@ -66,7 +66,7 @@ namespace NonProphet.Scripts.XR
         private void CursorPosition()
         {
             Transform cursorTransform = transform;
-            if (XRInputController.Hover(check, Vector3.down, out RaycastHit hit, range))
+            if (XRInputController.Hover(check, Vector3.down, out RaycastHit hit, CursorController.Range * XRInputController.ScaleFactor()))
             {
                 cursorTransform.position = hit.point;
                 cursorTransform.up = hit.normal;
@@ -81,6 +81,16 @@ namespace NonProphet.Scripts.XR
         {
             positions = new[] {Vector3.zero, new Vector3(0, offset, 0)};
             CursorLineRenderer.SetPositions(positions);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        private void ScaleLineRendererWidth(bool activate = true)
+        {
+            if (!activate) return;
+            float scaleFactor = XRInputController.ScaleFactor();
+            CursorLineRenderer.startWidth = initialWidth * scaleFactor;
+            CursorLineRenderer.endWidth = initialWidth * scaleFactor;
         }
         /// <summary>
         /// 
