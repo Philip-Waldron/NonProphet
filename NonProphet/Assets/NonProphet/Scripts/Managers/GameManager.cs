@@ -7,22 +7,19 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public bool UseVR = true;
-    public Camera DefaultCamera;
-    public Camera VRCamera;
+    [SerializeField]
+    private bool _useVR = true;
 
     void Awake()
     {
         DontDestroyOnLoad(this);
-        Debug.Log("GameManager UseVR = " + UseVR);
-        XRSettings.enabled = UseVR;
-        DefaultCamera.gameObject.SetActive(!IsUsingVR());
-        VRCamera.gameObject.SetActive(IsUsingVR());
+        Debug.Log("GameManager UseVR = " + _useVR);
+        XRSettings.enabled = _useVR;
     }
 
     public bool IsUsingVR()
     {
-        return UseVR && IsXRDevicePresent();
+        return _useVR && IsXRDevicePresent();
     }
 
     public static bool IsXRDevicePresent()
