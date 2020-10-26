@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -26,7 +25,18 @@ public class GameManager : MonoBehaviour
     {
         var xrDisplaySubsystems = new List<XRDisplaySubsystem>();
         SubsystemManager.GetInstances(xrDisplaySubsystems);
-        return xrDisplaySubsystems.Any(xrDisplay => xrDisplay.running);
+        foreach (var xrDisplay in xrDisplaySubsystems)
+        {
+            if (xrDisplay.running)
+            {
+                Debug.Log(xrDisplay + " " + xrDisplay.running);
+                return true;
+            }
+            Debug.Log(xrDisplay + " " + xrDisplay.running);
+        }
+
+        Debug.Log("No XR Display, XRSettings: " + XRSettings.enabled);
+        return false;
     }
 
     private void OnEnable()
