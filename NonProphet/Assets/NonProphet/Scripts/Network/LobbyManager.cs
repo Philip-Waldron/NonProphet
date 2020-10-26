@@ -24,6 +24,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public GameObject OtherPlayerListingPrefab;
     public Transform PlayerListLayout;
 
+    private GameObject playerPlaceholder;
+
     private Dictionary<string, GameObject> _playerListings = new Dictionary<string, GameObject>();
 
     private void InstantiatePlayerListing(GameObject playerListingPrefab, Player player)
@@ -84,6 +86,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
 
         InstantiatePlayerListing(SelfPlayerListingPrefab, PhotonNetwork.LocalPlayer);
+        
+        if (PhotonNetwork.IsMasterClient)
+        {
+            playerPlaceholder = PhotonNetwork.Instantiate("PlayerPlaceholder",
+                new Vector3(),
+                new Quaternion(), 
+                0);
+        }
     }
 
     public override void OnLeftRoom()
