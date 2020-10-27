@@ -1,6 +1,7 @@
-﻿using Photon.Voice.Unity;
-using System.Collections;
+﻿using Photon.Voice.PUN;
+using Photon.Voice.Unity;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,25 +35,29 @@ public class SettingsManager : MonoBehaviour
 {
     [Header("Canvases")]
     public Canvas SettingsCanvas;
-    public Canvas MainMenuCanvas;
-    public Canvas LobbyCanvas;
+    public List<Canvas> OtherCanvases;
+    private List<bool> OtherCanvasesEnabledList = new List<bool>();
+    private CursorLockMode previousLockMode;
 
     [Header("Dropdowns")]
     public Dropdown inputsDropdown;
-    public Dropdown outputsDropdown;
 
     private bool settingsOpen;
-    private bool mainMenuOpen;
-    private bool lobbyOpen;
 
     private List<MicRef> micOptions;
-
-    [SerializeField]
     private Recorder recorder;
 
     void Awake()
     {
+        this.recorder = PhotonVoiceNetwork.Instance.PrimaryRecorder;
+
+        for (int i = 0; i < OtherCanvases.Count; i++)
+        {
+            OtherCanvasesEnabledList.Add(false);
+        }
+
         this.RefreshMicrophones();
+        this.SetSavedMicIfAvailable();
     }
 
     void Update()
@@ -62,8 +67,13 @@ public class SettingsManager : MonoBehaviour
             //Track state of enabled canvases when user hits escape
             if (!settingsOpen)
             {
-                mainMenuOpen = MainMenuCanvas.enabled;
-                lobbyOpen = LobbyCanvas.enabled;
+                for (int i = 0; i < OtherCanvases.Count; i++)
+                {
+                    var canvas = OtherCanvases[i];
+                    OtherCanvasesEnabledList[i] = canvas.enabled;
+                }
+
+                previousLockMode = Cursor.lockState;
             }
 
             settingsOpen = !settingsOpen;
@@ -71,17 +81,44 @@ public class SettingsManager : MonoBehaviour
             if (settingsOpen)
             {
                 SettingsCanvas.enabled = true;
-                MainMenuCanvas.enabled = false;
-                LobbyCanvas.enabled = false;
+                inputsDropdown.enabled = true;
+
+                foreach (Canvas canvas in OtherCanvases)
+                {
+                    canvas.enabled = false;
+                }
+
+                Cursor.lockState = CursorLockMode.None;
             }
 
             else
             {
                 SettingsCanvas.enabled = false;
+                inputsDropdown.enabled = false;
 
                 //Revert other canvases to their previous before the user hit escape
-                MainMenuCanvas.enabled = mainMenuOpen;
-                LobbyCanvas.enabled = lobbyOpen;
+                for (int i = 0; i < OtherCanvases.Count; i++)
+                {
+                    var canvas = OtherCanvases[i];
+                    canvas.enabled = OtherCanvasesEnabledList[i];
+                }
+
+                Cursor.lockState = previousLockMode;
+            }
+        }
+    }
+
+    private void SetSavedMicIfAvailable()
+    {
+        var micPreference = PlayerPrefs.GetString("MicPreference");
+
+        if (micPreference != null && this.recorder != null)
+        {
+            recorder.UnityMicrophoneDevice = micPreference;
+
+            if (recorder.RequiresRestart)
+            {
+                recorder.RestartRecording();
             }
         }
     }
@@ -100,14 +137,11 @@ public class SettingsManager : MonoBehaviour
         this.micOptions = new List<MicRef>();
         List<string> micOptionsStrings = new List<string>();
 
-        if (Recorder.PhotonMicrophoneEnumerator.IsSupported)
+        for (int i = 0; i < Microphone.devices.Length; i++)
         {
-            for (int i = 0; i < Recorder.PhotonMicrophoneEnumerator.Count; i++)
-            {
-                string n = Recorder.PhotonMicrophoneEnumerator.NameAtIndex(i);
-                this.micOptions.Add(new MicRef(n, Recorder.PhotonMicrophoneEnumerator.IDAtIndex(i)));
-                micOptionsStrings.Add(n);
-            }
+            string micName = Microphone.devices[i];
+            this.micOptions.Add(new MicRef(micName));
+            micOptionsStrings.Add(micName);
         }
 
         this.inputsDropdown.AddOptions(micOptionsStrings);
@@ -117,8 +151,15 @@ public class SettingsManager : MonoBehaviour
 
     private void MicDropdownValueChanged(MicRef mic)
     {
+        if (this.recorder == null)
+        {
+            return;
+        }
+
         this.recorder.MicrophoneType = mic.MicType;
-        this.recorder.PhotonMicrophoneDeviceId = mic.PhotonId;
+        this.recorder.UnityMicrophoneDevice = mic.Name;
+
+        PlayerPrefs.SetString("MicPreference", mic.Name);
 
         if (this.recorder.RequiresRestart)
         {
@@ -128,10 +169,26 @@ public class SettingsManager : MonoBehaviour
 
     private void SetCurrentValue()
     {
+        if (this.recorder == null)
+        {
+            Debug.LogWarning("Recorder is null");
+            return;
+        }
+
         if (this.micOptions == null)
         {
             Debug.LogWarning("micOptions list is null");
             return;
+        }
+
+        for (int valueIndex = 0; valueIndex < this.micOptions.Count; valueIndex++)
+        {
+            MicRef val = this.micOptions[valueIndex];
+            if (val.Name == PlayerPrefs.GetString("MicPreference"))
+            {
+                    this.inputsDropdown.value = valueIndex;
+                    return;
+            }
         }
 
         for (int valueIndex = 0; valueIndex < this.micOptions.Count; valueIndex++)

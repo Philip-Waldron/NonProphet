@@ -88,13 +88,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         InstantiatePlayerListing(SelfPlayerListingPrefab, PhotonNetwork.LocalPlayer);
 
-        if (PhotonNetwork.IsMasterClient)
-        {
-            playerPlaceholder = PhotonNetwork.Instantiate("PlayerPlaceholder",
-                new Vector3(),
-                new Quaternion(), 
-                0);
-        }
+        playerPlaceholder = PhotonNetwork.Instantiate("PlayerPlaceholder", new Vector3(), new Quaternion(), 0);
     }
 
     public override void OnLeftRoom()
